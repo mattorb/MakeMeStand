@@ -1,0 +1,540 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		450376902CEE587D0009AAEE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4503768F2CEE587D0009AAEE /* README.md */; };
+		453E032A2CEF58B300B73107 /* TestingExpectation in Frameworks */ = {isa = PBXBuildFile; productRef = 453E03292CEF58B300B73107 /* TestingExpectation */; };
+		453E033F2CEFA76700B73107 /* SimpleLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 453E033E2CEFA76700B73107 /* SimpleLogger */; };
+		45DD964B2CEBEE2000BC73B1 /* BlueConnect in Frameworks */ = {isa = PBXBuildFile; productRef = 45DD964A2CEBEE2000BC73B1 /* BlueConnect */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		45DD962D2CEBED3900BC73B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45DD96132CEBED3800BC73B1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45DD961A2CEBED3800BC73B1;
+			remoteInfo = MakeMeStand;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4503768F2CEE587D0009AAEE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		45DD961B2CEBED3800BC73B1 /* MakeMeStand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MakeMeStand.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		45DD962C2CEBED3900BC73B1 /* MakeMeStandTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MakeMeStandTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		45DD961D2CEBED3800BC73B1 /* MakeMeStand */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MakeMeStand;
+			sourceTree = "<group>";
+		};
+		45DD962F2CEBED3900BC73B1 /* MakeMeStandTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MakeMeStandTests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		45DD96182CEBED3800BC73B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				453E033F2CEFA76700B73107 /* SimpleLogger in Frameworks */,
+				45DD964B2CEBEE2000BC73B1 /* BlueConnect in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45DD96292CEBED3900BC73B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				453E032A2CEF58B300B73107 /* TestingExpectation in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		453E03252CEEA56700B73107 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		45DD96122CEBED3800BC73B1 = {
+			isa = PBXGroup;
+			children = (
+				4503768F2CEE587D0009AAEE /* README.md */,
+				45DD961D2CEBED3800BC73B1 /* MakeMeStand */,
+				45DD962F2CEBED3900BC73B1 /* MakeMeStandTests */,
+				453E03252CEEA56700B73107 /* Frameworks */,
+				45DD961C2CEBED3800BC73B1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		45DD961C2CEBED3800BC73B1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45DD961B2CEBED3800BC73B1 /* MakeMeStand.app */,
+				45DD962C2CEBED3900BC73B1 /* MakeMeStandTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		45DD961A2CEBED3800BC73B1 /* MakeMeStand */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45DD96402CEBED3900BC73B1 /* Build configuration list for PBXNativeTarget "MakeMeStand" */;
+			buildPhases = (
+				45DD96172CEBED3800BC73B1 /* Sources */,
+				45DD96182CEBED3800BC73B1 /* Frameworks */,
+				45DD96192CEBED3800BC73B1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				45DD961D2CEBED3800BC73B1 /* MakeMeStand */,
+			);
+			name = MakeMeStand;
+			packageProductDependencies = (
+				45DD964A2CEBEE2000BC73B1 /* BlueConnect */,
+				453E033E2CEFA76700B73107 /* SimpleLogger */,
+			);
+			productName = MakeMeStand;
+			productReference = 45DD961B2CEBED3800BC73B1 /* MakeMeStand.app */;
+			productType = "com.apple.product-type.application";
+		};
+		45DD962B2CEBED3900BC73B1 /* MakeMeStandTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45DD96432CEBED3900BC73B1 /* Build configuration list for PBXNativeTarget "MakeMeStandTests" */;
+			buildPhases = (
+				45DD96282CEBED3900BC73B1 /* Sources */,
+				45DD96292CEBED3900BC73B1 /* Frameworks */,
+				45DD962A2CEBED3900BC73B1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				45DD962E2CEBED3900BC73B1 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				45DD962F2CEBED3900BC73B1 /* MakeMeStandTests */,
+			);
+			name = MakeMeStandTests;
+			packageProductDependencies = (
+				453E03292CEF58B300B73107 /* TestingExpectation */,
+			);
+			productName = MakeMeStandTests;
+			productReference = 45DD962C2CEBED3900BC73B1 /* MakeMeStandTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		45DD96132CEBED3800BC73B1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1610;
+				LastUpgradeCheck = 1610;
+				TargetAttributes = {
+					45DD961A2CEBED3800BC73B1 = {
+						CreatedOnToolsVersion = 16.1;
+					};
+					45DD962B2CEBED3900BC73B1 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = 45DD961A2CEBED3800BC73B1;
+					};
+				};
+			};
+			buildConfigurationList = 45DD96162CEBED3800BC73B1 /* Build configuration list for PBXProject "MakeMeStand" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 45DD96122CEBED3800BC73B1;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				45DD96492CEBEE2000BC73B1 /* XCRemoteSwiftPackageReference "BlueConnect" */,
+				453E03282CEF58B300B73107 /* XCRemoteSwiftPackageReference "swift-testing-expectation" */,
+				453E033D2CEFA76700B73107 /* XCRemoteSwiftPackageReference "SimpleLogger" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 45DD961C2CEBED3800BC73B1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				45DD961A2CEBED3800BC73B1 /* MakeMeStand */,
+				45DD962B2CEBED3900BC73B1 /* MakeMeStandTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		45DD96192CEBED3800BC73B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				450376902CEE587D0009AAEE /* README.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45DD962A2CEBED3900BC73B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		45DD96172CEBED3800BC73B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45DD96282CEBED3900BC73B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		45DD962E2CEBED3900BC73B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45DD961A2CEBED3800BC73B1 /* MakeMeStand */;
+			targetProxy = 45DD962D2CEBED3900BC73B1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		45DD963E2CEBED3900BC73B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+			};
+			name = Debug;
+		};
+		45DD963F2CEBED3900BC73B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+			};
+			name = Release;
+		};
+		45DD96412CEBED3900BC73B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MakeMeStand/MakeMeStand.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MakeMeStand/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "To connect to your standing desk";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "To connect to your standing desk";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mattorb.MakeMeStand;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		45DD96422CEBED3900BC73B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MakeMeStand/MakeMeStand.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MakeMeStand/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "To connect to your standing desk";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "To connect to your standing desk";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mattorb.MakeMeStand;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		45DD96442CEBED3900BC73B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mattorb.MakeMeStandTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MakeMeStand.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MakeMeStand";
+			};
+			name = Debug;
+		};
+		45DD96452CEBED3900BC73B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mattorb.MakeMeStandTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MakeMeStand.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MakeMeStand";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		45DD96162CEBED3800BC73B1 /* Build configuration list for PBXProject "MakeMeStand" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45DD963E2CEBED3900BC73B1 /* Debug */,
+				45DD963F2CEBED3900BC73B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45DD96402CEBED3900BC73B1 /* Build configuration list for PBXNativeTarget "MakeMeStand" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45DD96412CEBED3900BC73B1 /* Debug */,
+				45DD96422CEBED3900BC73B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45DD96432CEBED3900BC73B1 /* Build configuration list for PBXNativeTarget "MakeMeStandTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45DD96442CEBED3900BC73B1 /* Debug */,
+				45DD96452CEBED3900BC73B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		453E03282CEF58B300B73107 /* XCRemoteSwiftPackageReference "swift-testing-expectation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mattorb/swift-testing-expectation.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		453E033D2CEFA76700B73107 /* XCRemoteSwiftPackageReference "SimpleLogger" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mattorb/SimpleLogger.git";
+			requirement = {
+				kind = revision;
+				revision = 35d17356b1830bd027edbf98e676992f1a92974c;
+			};
+		};
+		45DD96492CEBEE2000BC73B1 /* XCRemoteSwiftPackageReference "BlueConnect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mattorb/BlueConnect";
+			requirement = {
+				kind = revision;
+				revision = d381514a5c7b0c43449d75f0c74c7042a566de9a;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		453E03292CEF58B300B73107 /* TestingExpectation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 453E03282CEF58B300B73107 /* XCRemoteSwiftPackageReference "swift-testing-expectation" */;
+			productName = TestingExpectation;
+		};
+		453E033E2CEFA76700B73107 /* SimpleLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 453E033D2CEFA76700B73107 /* XCRemoteSwiftPackageReference "SimpleLogger" */;
+			productName = SimpleLogger;
+		};
+		45DD964A2CEBEE2000BC73B1 /* BlueConnect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45DD96492CEBEE2000BC73B1 /* XCRemoteSwiftPackageReference "BlueConnect" */;
+			productName = BlueConnect;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 45DD96132CEBED3800BC73B1 /* Project object */;
+}
