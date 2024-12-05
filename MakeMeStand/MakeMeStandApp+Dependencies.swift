@@ -12,6 +12,7 @@ extension MakeMeStandApp {
         options: [
           CBCentralManagerOptionRestoreIdentifierKey: "MakeMeStandRestoreIdentifier"
         ]))
+
     remoteControl.doubleTapPublisher
       .receive(on: DispatchQueue.main)
       .sink { direction in
@@ -33,7 +34,7 @@ extension MakeMeStandApp {
         }
       }
       .store(in: &remoteControl.subscriptions)
-    
+
     container.registerSingleton(type: IdasenLinakBleRemoteControl.self) { remoteControl }
 
     let autoStand = PeriodicAutoStand(

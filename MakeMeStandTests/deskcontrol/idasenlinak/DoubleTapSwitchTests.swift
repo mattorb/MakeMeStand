@@ -42,7 +42,7 @@ class DoubleTapSwitchTests {
       ], upExpectation: expectUp)
 
     await expectUp.fulfillment(within: .seconds(5))
-    
+
     #expect(result == .up)
   }
 
@@ -74,7 +74,7 @@ class DoubleTapSwitchTests {
       upExpectation: expectNothing,
       downExpectation: expectNothing
     )
-    
+
     await expectNothing.fulfillment(within: .seconds(5))
 
     #expect(result == .none)
@@ -93,13 +93,15 @@ class DoubleTapSwitchTests {
       upExpectation: expectNothing,
       downExpectation: expectNothing
     )
-    
+
     await expectNothing.fulfillment(within: .seconds(5))
 
     #expect(result == .none)
   }
 
-  private func simulate(positionUpdates: [DeskPosition], upExpectation: TestingExpectation.Expectation? = nil, downExpectation: TestingExpectation.Expectation? = nil) async throws
+  private func simulate(
+    positionUpdates: [DeskPosition], upExpectation: TestingExpectation.Expectation? = nil, downExpectation: TestingExpectation.Expectation? = nil
+  ) async throws
     -> SwitchMoveDirection?
   {
     let state = try await scan(autoconnect: true).state

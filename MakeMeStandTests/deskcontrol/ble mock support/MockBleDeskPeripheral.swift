@@ -147,7 +147,7 @@ class MockBleDeskPeripheral: BlePeripheral, @unchecked Sendable {
         self,
         didWriteValueFor: internalCharacteristic,
         error: nil)
-      
+
       if withNotify {
         peripheralDelegate?.blePeripheral(
           self,

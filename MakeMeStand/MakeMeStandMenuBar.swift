@@ -163,7 +163,7 @@ struct MakeMeStandMenuBar: Scene {
           }
 
         Toggle("Show desk height in menu bar", isOn: $showHeightInMenuBar)
-        
+
         Toggle("Enable Double tap (switch) to stand/sit", isOn: $doubleTapSwitch)
 
         Section("Auto Stand") {

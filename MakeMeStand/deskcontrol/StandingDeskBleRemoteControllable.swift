@@ -18,7 +18,7 @@ protocol StandingDeskBleRemoteControllable {
 
   var activeDeskState: BleDeskConnectionState { get }
   var nearbyDesks: [UUID: BlePeripheral] { get }
-  
+
   var doubleTapPublisher: PassthroughSubject<SwitchMoveDirection, Never> { get }
 }
 

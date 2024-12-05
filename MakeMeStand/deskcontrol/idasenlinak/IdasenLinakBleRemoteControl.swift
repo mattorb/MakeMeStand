@@ -15,9 +15,9 @@ class IdasenLinakBleRemoteControl: StandingDeskBleRemoteControllable {
   var subscriptions: Set<AnyCancellable> = []
   @ObservationIgnored
   var automationSubscription: AnyCancellable?
-  
+
   @ObservationIgnored
-  private var doubleTapDetector: IdasenLinakBleDoubleTapSwitchDetector? // only after connect
+  private var doubleTapDetector: IdasenLinakBleDoubleTapSwitchDetector?  // only after connect
   @ObservationIgnored
   var doubleTapPublisher: PassthroughSubject<SwitchMoveDirection, Never> = .init()
 
