@@ -1,17 +1,39 @@
 import BlueConnect
+import Combine
 import CoreBluetooth
 
 extension MakeMeStandApp {
   func initializeDependencies(container: DependencyContainer) {
     let settings = Settings()
     container.registerSingleton(type: Settings.self) { settings }
-
     let remoteControl = IdasenLinakBleRemoteControl(
       proxy: BleCentralManagerProxy(
         queue: .main,
         options: [
           CBCentralManagerOptionRestoreIdentifierKey: "MakeMeStandRestoreIdentifier"
         ]))
+    remoteControl.doubleTapPublisher
+      .receive(on: DispatchQueue.main)
+      .sink { direction in
+        switch direction {
+        case .down:
+          if settings.doubleTapSwitch.currentValue() {
+            Task {
+              let sittingHeightIn = settings.sittingHeightIn.currentValue()
+              try await remoteControl.move(to: Measurement(value: sittingHeightIn, unit: .inches))
+            }
+          }
+        case .up:
+          if settings.doubleTapSwitch.currentValue() {
+            Task {
+              let standingHeightIn = settings.standingHeightIn.currentValue()
+              try await remoteControl.move(to: Measurement(value: standingHeightIn, unit: .inches))
+            }
+          }
+        }
+      }
+      .store(in: &remoteControl.subscriptions)
+    
     container.registerSingleton(type: IdasenLinakBleRemoteControl.self) { remoteControl }
 
     let autoStand = PeriodicAutoStand(

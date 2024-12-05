@@ -117,6 +117,12 @@ struct DeskMoveCommandProxy: BleCharacteristicWriteProxy {
   }
 }
 
+/// The physical switch on the desk
+enum SwitchMoveDirection {
+  case up
+  case down
+}
+
 /// raw height value from BT characteristic is in this UOM
 extension UnitLength {
   static let tenthsOfMillimeters = UnitLength(symbol: "0.1 mm", converter: UnitConverterLinear(coefficient: 0.0001))

@@ -5,15 +5,21 @@ import Foundation
 
 @Observable
 class IdasenLinakBleRemoteControl: StandingDeskBleRemoteControllable {
+  var nearbyDesks: [UUID: BlePeripheral] = [:]
+  var activeDeskState: BleDeskConnectionState = .unknown
+
   @ObservationIgnored
   let centralManagerProxy: BleCentralManagerProxy
 
   @ObservationIgnored
   var subscriptions: Set<AnyCancellable> = []
+  @ObservationIgnored
   var automationSubscription: AnyCancellable?
-
-  var nearbyDesks: [UUID: BlePeripheral] = [:]
-  var activeDeskState: BleDeskConnectionState = .unknown
+  
+  @ObservationIgnored
+  private var doubleTapDetector: IdasenLinakBleDoubleTapSwitchDetector? // only after connect
+  @ObservationIgnored
+  var doubleTapPublisher: PassthroughSubject<SwitchMoveDirection, Never> = .init()
 
   init(proxy: BleCentralManagerProxy) {
     centralManagerProxy = proxy
@@ -126,6 +132,15 @@ class IdasenLinakBleRemoteControl: StandingDeskBleRemoteControllable {
 
       // state & ensure these are all retained
       activeDeskState = .connected(desk, peripheralProxy, deskPositionProxy, deskMoveCommandProxy, Measurement(value: 0, unit: .inches))
+
+      doubleTapDetector = IdasenLinakBleDoubleTapSwitchDetector(deskPositionProxy: deskPositionProxy)
+
+      doubleTapDetector?.onDoubleTapPublisher
+        .receive(on: DispatchQueue.main)
+        .sink {
+          self.doubleTapPublisher.send($0)
+        }
+        .store(in: &subscriptions)
 
       let height = try await currentHeight()
 

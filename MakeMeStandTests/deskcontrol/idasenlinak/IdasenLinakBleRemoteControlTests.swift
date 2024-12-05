@@ -1,10 +1,9 @@
+import BlueConnect
 import Combine
-@preconcurrency import CoreBluetooth
 import Foundation
 import Testing
 import TestingExpectation  // for waiting on async work queued outside of direct control/callback
 
-@testable import BlueConnect
 @testable import MakeMeStand
 
 class IdasenLinakBleRemoteControlTests {

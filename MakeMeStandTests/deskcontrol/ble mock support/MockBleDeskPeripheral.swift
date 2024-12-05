@@ -4,6 +4,7 @@ import MakeMeStand
 @testable import BlueConnect
 
 class MockBleDeskPeripheral: BlePeripheral, @unchecked Sendable {
+  let disableIntervalNotify: Bool
   let identifier: UUID
   var name: String? {
     didSet {
@@ -39,10 +40,12 @@ class MockBleDeskPeripheral: BlePeripheral, @unchecked Sendable {
   // MARK: - Initialization
 
   init(
+    disableIntervalNotify: Bool = false,
     identifier: UUID,
     name: String?,
     position: DeskPosition
   ) {
+    self.disableIntervalNotify = disableIntervalNotify
     self.identifier = identifier
     self.name = name
     self.position = position
@@ -128,7 +131,7 @@ class MockBleDeskPeripheral: BlePeripheral, @unchecked Sendable {
   }
 
   /// to simulate ble device side characteristic updating (and notifying) state that is not 1-to-1 with a command/write/read
-  func updateValueInternal(_ data: Data, for characteristic: CBCharacteristic) {
+  func updateValueInternal(_ data: Data, for characteristic: CBCharacteristic, withNotify: Bool = false) {
     guard let internalCharacteristic = findInternalMutableCharacteristic(characteristic) else {
       peripheralDelegate?.blePeripheral(
         self,
@@ -144,6 +147,13 @@ class MockBleDeskPeripheral: BlePeripheral, @unchecked Sendable {
         self,
         didWriteValueFor: internalCharacteristic,
         error: nil)
+      
+      if withNotify {
+        peripheralDelegate?.blePeripheral(
+          self,
+          didUpdateValueFor: internalCharacteristic,
+          error: nil)
+      }
     }
     _writeInternal()
   }
@@ -344,7 +354,9 @@ class MockBleDeskPeripheral: BlePeripheral, @unchecked Sendable {
     timer?.schedule(deadline: .now() + .seconds(1), repeating: 1.0)
     timer?.setEventHandler { [weak self] in
       guard let self else { return }
-      notifyInterval()
+      if !disableIntervalNotify {
+        notifyInterval()
+      }
     }
     timer?.resume()
   }

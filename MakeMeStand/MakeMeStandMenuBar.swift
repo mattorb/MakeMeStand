@@ -11,6 +11,7 @@ struct MakeMeStandMenuBar: Scene {
   @AppStorage(\.autoStandMinute) var autoStandMinute: Int
   @AppStorage(\.autoSitMinute) var autoSitMinute: Int
   @AppStorage(\.autoStandInactivityTimeout) var autoStandInactivityTimeout: Int
+  @AppStorage(\.doubleTapSwitch) var doubleTapSwitch: Bool
 
   // always store inches, regardless of display
   @AppStorage(\.standingHeightIn) var standingHeightIn: Double
@@ -162,6 +163,8 @@ struct MakeMeStandMenuBar: Scene {
           }
 
         Toggle("Show desk height in menu bar", isOn: $showHeightInMenuBar)
+        
+        Toggle("Enable Double tap (switch) to stand/sit", isOn: $doubleTapSwitch)
 
         Section("Auto Stand") {
           Toggle("Automatic Stand (toggle)", isOn: $autoStand)

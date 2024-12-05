@@ -11,6 +11,7 @@ class Settings {
   var autoStandInactivityTimeout: Setting<Int> { .init("autoStandInactivityTimeout", defaultValue: 5) }
   var standingHeightIn: Setting<Double> { .init("standingHeightIn", defaultValue: 40.2244) }
   var sittingHeightIn: Setting<Double> { .init("sittingHeightIn", defaultValue: 25.00) }
+  var doubleTapSwitch: Setting<Bool> { .init("doubleTapSwitch", defaultValue: false) }
 }
 
 struct Setting<Value> {
