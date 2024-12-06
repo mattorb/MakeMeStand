@@ -86,6 +86,25 @@ class DoubleTapSwitchTests {
 
     let result = try await simulate(
       positionUpdates: [
+        .init(rawPosition: 1000 + UInt16((1 * 40)), rawSpeed: 120),
+        .init(rawPosition: 1000 + UInt16((2 * 40)), rawSpeed: 80),
+        .init(rawPosition: 1000 + UInt16((3 * 40)), rawSpeed: 0),
+      ],
+      upExpectation: expectNothing,
+      downExpectation: expectNothing
+    )
+
+    await expectNothing.fulfillment(within: .seconds(5))
+
+    #expect(result == .none)
+  }
+
+  @Test
+  func ignoreStillMoving() async throws {
+    let expectNothing = Expectation(expectedCount: 0)
+
+    let result = try await simulate(
+      positionUpdates: [
         .init(rawPosition: 1000 + UInt16((1 * 40)), rawSpeed: 0),
         .init(rawPosition: 1000 + UInt16((2 * 40)), rawSpeed: 80),
         .init(rawPosition: 1000 + UInt16((3 * 40)), rawSpeed: 120),

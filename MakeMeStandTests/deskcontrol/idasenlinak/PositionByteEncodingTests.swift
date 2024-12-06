@@ -14,7 +14,6 @@ struct PositionByteEncodingTests {
     #expect(decodedPosition.rawPosition == 12345)
     #expect(decodedPosition.rawSpeed == 300)
   }
-
   @Test func encodeDecodeTypeLimits() async throws {
     let deskPosition = DeskPosition(rawPosition: UInt16.max, rawSpeed: Int16.min)
     let data = deskPosition.data()
