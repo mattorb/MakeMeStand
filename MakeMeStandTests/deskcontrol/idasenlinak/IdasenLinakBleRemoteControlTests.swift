@@ -16,9 +16,10 @@ class IdasenLinakBleRemoteControlTests {
     position: DeskPosition(rawPosition: 1778, rawSpeed: 100)
   )
   let deskRemoteControl: StandingDeskBleRemoteControllable
+  let scanNotifyInterval = 1.0
 
   init() {
-    bleCentralManager = MockBleCentralManager(peripherals: [mockDeskPeripheral])
+    bleCentralManager = MockBleCentralManager(peripherals: [mockDeskPeripheral], scanNotifyInterval: scanNotifyInterval)
     bleCentralManagerProxy = BleCentralManagerProxy(centralManager: bleCentralManager)
     bleCentralManager.state = .poweredOn
     deskRemoteControl = IdasenLinakBleRemoteControl(proxy: bleCentralManagerProxy)
@@ -294,7 +295,7 @@ class IdasenLinakBleRemoteControlTests {
     if autoconnect {
       await connectExpectation.fulfillment(within: .seconds(10))
 
-      try await Task.sleep(for: .seconds(1.0))  // give the value read/notify queue time to process...ick.
+      try await Task.sleep(for: .seconds(scanNotifyInterval))  // give the value read/notify queue time to process...ick.
     }
 
     return (deskRemoteControl.activeDeskState, discoveredDeviceName)

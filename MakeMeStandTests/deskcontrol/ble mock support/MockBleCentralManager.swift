@@ -24,12 +24,15 @@ class MockBleCentralManager: BleCentralManager, @unchecked Sendable {
   var scanTimer: DispatchSourceTimer?
   var scanCounter: Int = 0
 
+  var scanNotifyInterval: TimeInterval
+
   lazy var queue: DispatchQueue = DispatchQueue.global(qos: .background)
 
   // MARK: - Initialization
 
-  init(peripherals: [BlePeripheral]) {
+  init(peripherals: [BlePeripheral], scanNotifyInterval: TimeInterval) {
     self.peripherals = peripherals
+    self.scanNotifyInterval = scanNotifyInterval
   }
 
   // MARK: - Interface
@@ -118,7 +121,7 @@ class MockBleCentralManager: BleCentralManager, @unchecked Sendable {
     scanCounter = 0
     scanTimer?.cancel()
     scanTimer = DispatchSource.makeTimerSource(queue: .global())
-    scanTimer?.schedule(deadline: .now() + .seconds(1), repeating: 1.0)
+    scanTimer?.schedule(deadline: .now() + scanNotifyInterval, repeating: scanNotifyInterval)
     scanTimer?.setEventHandler { [weak self] in
       guard let self else { return }
       scanInterval()

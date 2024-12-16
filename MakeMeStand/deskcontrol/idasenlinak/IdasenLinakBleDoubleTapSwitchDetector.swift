@@ -4,17 +4,19 @@ import Foundation
 /// Detect physical desk switch up/down double tap
 class IdasenLinakBleDoubleTapSwitchDetector {
   let deskPositionProxy: DeskPositionProxy
+  let doubleTapThresholdSeconds: Double
 
   var onDoubleTapPublisher: PassthroughSubject<SwitchMoveDirection, Never> = PassthroughSubject()
 
   var subscriptions: Set<AnyCancellable> = []
 
-  init(deskPositionProxy: DeskPositionProxy) {
+  init(deskPositionProxy: DeskPositionProxy, doubleTapThresholdSeconds: Double) {
     self.deskPositionProxy = deskPositionProxy
+    self.doubleTapThresholdSeconds = doubleTapThresholdSeconds
 
     deskPositionProxy.didUpdateValuePublisher
       .receive(on: DispatchQueue.main)
-      .collect(.byTime(DispatchQueue.main, 1.0))
+      .collect(.byTime(DispatchQueue.main, .init(floatLiteral: doubleTapThresholdSeconds)))
       .filter { positions in
         let twoDiscreteStops =
           positions.filter {

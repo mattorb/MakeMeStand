@@ -17,9 +17,10 @@ class DoubleTapSwitchTests {
     position: DeskPosition(rawPosition: 1778, rawSpeed: 100)
   )
   let deskRemoteControl: StandingDeskBleRemoteControllable
+  let scanNotifyInterval = 0.1
 
   init() {
-    bleCentralManager = MockBleCentralManager(peripherals: [mockDeskPeripheral])
+    bleCentralManager = MockBleCentralManager(peripherals: [mockDeskPeripheral], scanNotifyInterval: scanNotifyInterval)
     bleCentralManagerProxy = BleCentralManagerProxy(centralManager: bleCentralManager)
     bleCentralManager.state = .poweredOn
     deskRemoteControl = IdasenLinakBleRemoteControl(proxy: bleCentralManagerProxy)
@@ -134,7 +135,8 @@ class DoubleTapSwitchTests {
 
     var result: SwitchMoveDirection? = nil
 
-    let doubleTapDetector = IdasenLinakBleDoubleTapSwitchDetector(deskPositionProxy: deskPositionProxy)
+    let thresholdSeconds = 0.2
+    let doubleTapDetector = IdasenLinakBleDoubleTapSwitchDetector(deskPositionProxy: deskPositionProxy, doubleTapThresholdSeconds: thresholdSeconds)
 
     doubleTapDetector.onDoubleTapPublisher
       .receive(on: DispatchQueue.main)
@@ -158,7 +160,13 @@ class DoubleTapSwitchTests {
       mockDeskPeripheral.updateValueInternal(position.data(), for: positionCharacteristic, withNotify: true)
     }
 
-    try await Task.sleep(for: .seconds(1.0))  // give the value read/notify queue time to process...ick.
+    await withCheckedContinuation { continuation in
+      DispatchQueue.main.async(flags: .barrier) {
+        continuation.resume()
+      }
+    }
+
+    try await Task.sleep(for: .seconds(thresholdSeconds + 0.1))  // double tap detection threshold + 0.1 for Combine -- ick
 
     return result
   }
@@ -182,7 +190,7 @@ class DoubleTapSwitchTests {
     if autoconnect {
       await connectExpectation.fulfillment(within: .seconds(10))
 
-      try await Task.sleep(for: .seconds(1.0))  // give the value read/notify queue time to process...ick.
+      try await Task.sleep(for: .seconds(scanNotifyInterval))  // give scan
     }
 
     return (deskRemoteControl.activeDeskState, discoveredDeviceName)

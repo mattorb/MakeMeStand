@@ -133,7 +133,7 @@ class IdasenLinakBleRemoteControl: StandingDeskBleRemoteControllable {
       // state & ensure these are all retained
       activeDeskState = .connected(desk, peripheralProxy, deskPositionProxy, deskMoveCommandProxy, Measurement(value: 0, unit: .inches))
 
-      doubleTapDetector = IdasenLinakBleDoubleTapSwitchDetector(deskPositionProxy: deskPositionProxy)
+      doubleTapDetector = IdasenLinakBleDoubleTapSwitchDetector(deskPositionProxy: deskPositionProxy, doubleTapThresholdSeconds: 1)
 
       doubleTapDetector?.onDoubleTapPublisher
         .receive(on: DispatchQueue.main)
