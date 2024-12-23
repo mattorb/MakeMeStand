@@ -1,3 +1,4 @@
+import AppKit
 import BlueConnect
 import Combine
 import CoreBluetooth
@@ -24,21 +25,8 @@ class IdasenLinakBleRemoteControl: StandingDeskBleRemoteControllable {
   init(proxy: BleCentralManagerProxy) {
     centralManagerProxy = proxy
 
-    centralManagerProxy.didConnectPublisher
-      .receive(on: DispatchQueue.main)
-      .sink { peripheral in
-        Log.app.debug("peripheral '\(peripheral.identifier)' connected")
-      }
-      .store(in: &subscriptions)
-
-    centralManagerProxy.didFailToConnectPublisher
-      .receive(on: DispatchQueue.main)
-      .sink { peripheral, error in
-        Log.app.debug(
-          "peripheral '\(peripheral.identifier)' failed to connect with error: \(error)"
-        )
-      }
-      .store(in: &subscriptions)
+    setupConnectStateDebugLogging()
+    setupReconnectBLEPeripheralOnWakeFromSleep()
   }
 
   /// Start Scan, returns immediately.   Results land in ``nearbyDesks`` as they are found
@@ -318,5 +306,54 @@ class IdasenLinakBleRemoteControl: StandingDeskBleRemoteControllable {
     } else {
       return Measurement(value: 0, unit: .centimeters)
     }
+  }
+}
+
+extension IdasenLinakBleRemoteControl {
+  private func setupConnectStateDebugLogging() {
+    centralManagerProxy.didConnectPublisher
+      .receive(on: DispatchQueue.main)
+      .sink { peripheral in
+        Log.app.debug("peripheral '\(peripheral.identifier)' connected")
+      }
+      .store(in: &subscriptions)
+
+    centralManagerProxy.didFailToConnectPublisher
+      .receive(on: DispatchQueue.main)
+      .sink { peripheral, error in
+        Log.app.debug(
+          "peripheral '\(peripheral.identifier)' failed to connect with error: \(error)"
+        )
+      }
+      .store(in: &subscriptions)
+  }
+}
+
+extension IdasenLinakBleRemoteControl {
+  private func setupReconnectBLEPeripheralOnWakeFromSleep() {
+    NSWorkspace.shared.notificationCenter
+      .publisher(for: NSWorkspace.didWakeNotification)
+      .receive(on: DispatchQueue.main)
+      .sink { _ in
+        Log.app.debug("mac waking from sleep.")
+
+        func reconnect(_ peripheral: BlePeripheral) {
+          Task {
+            Log.app.debug("wake: reconnecting")
+            do {
+              try await self.connect(peripheral)
+            } catch {
+              Log.app.warning("Unable to reconnect to peripheral: \(peripheral.identifier)")
+            }
+          }
+        }
+
+        if case .connected(let peripheral, _, _, _, _) = self.activeDeskState,
+          peripheral.state == .disconnected
+        {
+          reconnect(peripheral)
+        }
+      }
+      .store(in: &subscriptions)
   }
 }
