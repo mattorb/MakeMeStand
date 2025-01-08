@@ -131,8 +131,12 @@ struct MakeMeStandMenuBar: Scene {
         }
       }
 
-      if autoStand {
-        Text("Next automatic stand: xx:\(autoStandMinute)-xx:\(autoSitMinute), if activity within \(autoStandInactivityTimeout) minutes")
+      if autoStand,
+        let nextSpan = autostandController.nextSpan
+      {
+        Text(
+          "Next automatic stand: \(nextSpan.stand.formatted(date: .omitted, time: .shortened))-\(nextSpan.sit.formatted(date: .omitted, time: .shortened)), if activity within \(autoStandInactivityTimeout) minutes"
+        )
       }
 
       Divider()

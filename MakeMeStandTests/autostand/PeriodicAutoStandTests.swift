@@ -7,18 +7,40 @@ import TestingExpectation
 
 class PeriodicAutoStandTests {
   @Test
+  func testNextSpanNoOverlap() async throws {
+    let settings = Settings(userDefaultsProvider: FakeUserDefaultsProvider())
+
+    let scenarios: [(currentTime: Date, expectedStandTime: Date, expectedSitTime: Date)] = [
+      (.todayAt(hour: 10, minute: 30), .todayAt(hour: 10, minute: 55), .todayAt(hour: 11, minute: 00)),
+      (.todayAt(hour: 10, minute: 58), .todayAt(hour: 11, minute: 55), .todayAt(hour: 12, minute: 00)),
+      (.todayAt(hour: 11, minute: 00), .todayAt(hour: 11, minute: 55), .todayAt(hour: 12, minute: 00)),
+      (.todayAt(hour: 11, minute: 01), .todayAt(hour: 11, minute: 55), .todayAt(hour: 12, minute: 00)),
+    ]
+
+    for scenario in scenarios {
+      let autoStand = PeriodicAutoStand(
+        settings: settings,
+        stand: {},
+        sit: {},
+        currentTimeProvider: MockTimeProvider(simulatedDate: scenario.currentTime)
+      )
+
+      #expect(autoStand.nextSpan?.stand == scenario.expectedStandTime)
+      #expect(autoStand.nextSpan?.sit == scenario.expectedSitTime)
+    }
+  }
+
+  @Test
   func shouldTriggerStand() async {
     let standExpectation = Expectation()
     let autoStand = PeriodicAutoStand(
       settings: Settings(),
       stand: { standExpectation.fulfill() },
-      sit: { Issue.record("Should not fire sit") }
+      sit: { Issue.record("Should not fire sit") },
+      currentTimeProvider: MockTimeProvider(simulatedDate: .todayAt(hour: 10, minute: 10))
     )
 
-    let now: Date = .todayAt(hour: 10, minute: 10)
-
     autoStand.adjustHeightIfNeeded(
-      now: now,
       autoStandEnabled: true,
       autoStandMinute: 10,
       autoSitMinute: 15,
@@ -34,13 +56,11 @@ class PeriodicAutoStandTests {
     let autoStand = PeriodicAutoStand(
       settings: Settings(),
       stand: { Issue.record("Should not fire stand") },
-      sit: { sitExpectation.fulfill() }
+      sit: { sitExpectation.fulfill() },
+      currentTimeProvider: MockTimeProvider(simulatedDate: .todayAt(hour: 10, minute: 15))
     )
 
-    let now: Date = .todayAt(hour: 10, minute: 15)
-
     autoStand.adjustHeightIfNeeded(
-      now: now,
       autoStandEnabled: true,
       autoStandMinute: 10,
       autoSitMinute: 15,
@@ -58,13 +78,11 @@ class PeriodicAutoStandTests {
     let autoStand = PeriodicAutoStand(
       settings: Settings(),
       stand: { eventFiredExpectation.fulfill() },
-      sit: { eventFiredExpectation.fulfill() }
+      sit: { eventFiredExpectation.fulfill() },
+      currentTimeProvider: MockTimeProvider(simulatedDate: .todayAt(hour: 10, minute: 20))
     )
 
-    let now: Date = .todayAt(hour: 10, minute: 20)
-
     autoStand.adjustHeightIfNeeded(
-      now: now,
       autoStandEnabled: true,
       autoStandMinute: 10,
       autoSitMinute: 15,
@@ -80,13 +98,11 @@ class PeriodicAutoStandTests {
     let autoStand = PeriodicAutoStand(
       settings: Settings(),
       stand: { eventFiredExpectation.fulfill() },
-      sit: { eventFiredExpectation.fulfill() }
+      sit: { eventFiredExpectation.fulfill() },
+      currentTimeProvider: MockTimeProvider(simulatedDate: .todayAt(hour: 10, minute: 15))
     )
 
-    let now: Date = .todayAt(hour: 10, minute: 15)
-
     autoStand.adjustHeightIfNeeded(
-      now: now,
       autoStandEnabled: true,
       autoStandMinute: 10,
       autoSitMinute: 15,
@@ -104,6 +120,25 @@ extension Date {
     dateComponents.hour = hour
     dateComponents.minute = minute
     dateComponents.second = 0
+    dateComponents.timeZone = calendar.timeZone
     return calendar.date(from: dateComponents)!
+  }
+}
+
+struct MockTimeProvider: CurrentTimeProvider {
+  private let simulatedDate: Date
+
+  init(simulatedDate: Date) {
+    self.simulatedDate = simulatedDate
+  }
+
+  func now() -> Date {
+    return simulatedDate
+  }
+}
+
+struct FakeUserDefaultsProvider: UserDefaultsProvider {
+  var userDefaults: UserDefaults {
+    return UserDefaults(suiteName: "autoStandTests")!
   }
 }

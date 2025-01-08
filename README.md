@@ -3,7 +3,7 @@
 # Make Me Stand!
 A macOS status menu app that automatically triggers the IDÅSEN powered standing desk periodically throughout the day.
 
-![makemestand_statusmenu_app](https://github.com/user-attachments/assets/a20b4249-316a-4b4c-9b70-576b3d34a020)
+![makemestand_statusmenu_app](https://github.com/user-attachments/assets/b0a4a86d-75fc-47f0-bc48-a2fcee20abb3)
 
 **Pre-requisite:** Requires you to own the compatible powered desk with matching Linak [DPG] BLE controller.
 

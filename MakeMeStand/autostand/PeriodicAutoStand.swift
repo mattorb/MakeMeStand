@@ -15,8 +15,27 @@ class PeriodicAutoStand {
   var sitMinuteMarker: Int
   let inactivityTimeoutMinutes: Int
   let settings: Settings
+  let currentTimeProvider: CurrentTimeProvider
 
-  init(settings: Settings, stand: @escaping () -> Void, sit: @escaping () -> Void) {
+  var nextSpan: (stand: Date, sit: Date)? {
+    guard enabled else { return nil }
+
+    let calendar = Calendar.current
+
+    let now = currentTimeProvider.now()
+
+    guard let nextStand = calendar.nextDate(after: now, matching: DateComponents(minute: standMinuteMarker), matchingPolicy: .strict) else {
+      return nil
+    }
+
+    guard let nextSit = calendar.nextDate(after: nextStand, matching: DateComponents(minute: sitMinuteMarker), matchingPolicy: .strict) else {
+      return nil
+    }
+
+    return (nextStand, nextSit)
+  }
+
+  init(settings: Settings, stand: @escaping () -> Void, sit: @escaping () -> Void, currentTimeProvider: CurrentTimeProvider = SystemTimeProvider()) {
     Log.app.debug("PeriodicAutoStand initialized.")
     self.settings = settings
     self.enabled = settings.autoStand.currentValue()
@@ -25,11 +44,12 @@ class PeriodicAutoStand {
     self.inactivityTimeoutMinutes = settings.autoStandInactivityTimeout.currentValue()
     self.stand = stand
     self.sit = sit
+    self.currentTimeProvider = currentTimeProvider
     scheduleTimer()
   }
 
   private func scheduleTimer() {
-    let now = Date()
+    let now = currentTimeProvider.now()
     let calendar = Calendar.current
 
     guard let nextMinute = calendar.nextDate(after: now, matching: DateComponents(second: 0), matchingPolicy: .strict) else {
@@ -52,16 +72,16 @@ class PeriodicAutoStand {
   }
 
   func adjustHeightIfNeeded(
-    now: Date = Date(),
     autoStandEnabled: Bool,
     autoStandMinute: Int,
     autoSitMinute: Int,
     isUserActive: Bool
   ) {
+    let now = currentTimeProvider.now()
     let calendar = Calendar.current
     let minute = calendar.component(.minute, from: now)
 
-    guard enabled else { return }
+    guard autoStandEnabled else { return }
 
     self.standMinuteMarker = autoStandMinute
     self.sitMinuteMarker = autoSitMinute
