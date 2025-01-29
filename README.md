@@ -6,15 +6,13 @@ A macOS status menu app that automatically triggers the IDÅSEN powered standing
 
 Status Menu
 
-![makemestand_statusmenu_app](https://github.com/user-attachments/assets/b0a4a86d-75fc-47f0-bc48-a2fcee20abb3) 
+<img src="https://github.com/user-attachments/assets/b0a4a86d-75fc-47f0-bc48-a2fcee20abb3" width="300">
 
 Settings
 
-![makemestand_statusmenu_app_settings](https://github.com/user-attachments/assets/a448649c-ea32-46db-921a-168c3473de88)
+<img src="https://github.com/user-attachments/assets/a448649c-ea32-46db-921a-168c3473de88" width="300">
 
-**Why?**
-
-2 reasons:
+## Why?
 1. To make repeated and frequent standing throughout the day an easier default than not.
 1. I was looking for an excuse to explore writing tests for code that interacts with a BLE device, using the Blueconnect library, and building a status menu app with SwiftUI.
 
