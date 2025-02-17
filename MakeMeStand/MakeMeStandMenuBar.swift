@@ -33,6 +33,16 @@ struct MakeMeStandMenuBar: Scene {
     }
   }
 
+  var appVersion: String {
+    guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+      let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+    else {
+      return "Unknown"
+    }
+
+    return "\(version)-\(build)"
+  }
+
   var standingHeightFormatted: String {
     Measurement<UnitLength>(value: standingHeightIn, unit: .inches).formattedPreserveUnit()
   }
@@ -201,6 +211,7 @@ struct MakeMeStandMenuBar: Scene {
               standingHeightIn = currentHeight.converted(to: .inches).value
             }
           }
+          Text("Version \(appVersion)")
         }
       }
 
