@@ -13,7 +13,7 @@ Settings
 <img src="https://github.com/user-attachments/assets/a448649c-ea32-46db-921a-168c3473de88" width="300">
 
 ## Why?
-1. To make repeated and frequent standing throughout the day an easier default than not.
+1. To make periodic standing throughout the day an easier default than not.
 1. I was looking for an excuse to explore writing tests for code that interacts with a BLE device, using the Blueconnect library, and building a status menu app with SwiftUI.
 
 **Pre-requisite:** Requires you to own the compatible powered desk with matching Linak [DPG] BLE controller.
@@ -27,10 +27,10 @@ Settings
 
 ## Usage
 ### End User Installation
-Not available yet.
+Download and install a [release](https://github.com/mattorb/MakeMeStand/releases).
 
 ### Developer Installation
-Build and run in Xcode.
+Build source and run app from Xcode.
 
 ### Automatic Stand & Sit Configuration
 1. Configure an interval to match your preferences -- for example, 5 minutes of standing each hour near the end of the hour.
