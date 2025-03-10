@@ -18,6 +18,8 @@ class Settings {
   var standingHeightIn: Setting<Double> { .init("standingHeightIn", defaultValue: 40.2244, userDefaultsProvider: userDefaultsProvider) }
   var sittingHeightIn: Setting<Double> { .init("sittingHeightIn", defaultValue: 25.00, userDefaultsProvider: userDefaultsProvider) }
   var doubleTapSwitch: Setting<Bool> { .init("doubleTapSwitch", defaultValue: false, userDefaultsProvider: userDefaultsProvider) }
+  var pinToLastConnectedDesk: Setting<Bool> { .init("pinToLastConnectedDesk", defaultValue: false, userDefaultsProvider: userDefaultsProvider) }
+  var lastConnectedDeskUUID: Setting<String?> { .init("lastConnectedDeskUUID", defaultValue: nil, userDefaultsProvider: userDefaultsProvider) }
 }
 
 protocol UserDefaultsProvider {
@@ -48,6 +50,12 @@ struct Setting<Value> {
     }
 
     return defaultValue
+  }
+}
+
+extension Setting where Value == String? {
+  func save(_ value: String?) {
+    userDefaultsProvider.userDefaults.set(value, forKey: key)
   }
 }
 

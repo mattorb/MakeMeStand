@@ -22,7 +22,12 @@ class IdasenLinakBleRemoteControlTests {
     bleCentralManager = MockBleCentralManager(peripherals: [mockDeskPeripheral], scanNotifyInterval: scanNotifyInterval)
     bleCentralManagerProxy = BleCentralManagerProxy(centralManager: bleCentralManager)
     bleCentralManager.state = .poweredOn
-    deskRemoteControl = IdasenLinakBleRemoteControl(proxy: bleCentralManagerProxy)
+    deskRemoteControl = IdasenLinakBleRemoteControl(
+      proxy: bleCentralManagerProxy,
+      shouldPinToLastDesk: { false },
+      getLastConnectedDeskUUID: { nil },
+      saveLastConnectedDeskUUID: { _ in }
+    )
   }
 
   deinit {

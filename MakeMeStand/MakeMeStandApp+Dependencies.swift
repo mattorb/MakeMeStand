@@ -6,12 +6,16 @@ extension MakeMeStandApp {
   func initializeDependencies(container: DependencyContainer) {
     let settings = Settings()
     container.registerSingleton(type: Settings.self) { settings }
+
     let remoteControl = IdasenLinakBleRemoteControl(
       proxy: BleCentralManagerProxy(
         queue: .main,
         options: [
           CBCentralManagerOptionRestoreIdentifierKey: "MakeMeStandRestoreIdentifier"
-        ]))
+        ]),
+      shouldPinToLastDesk: { settings.pinToLastConnectedDesk.currentValue() },
+      getLastConnectedDeskUUID: { settings.lastConnectedDeskUUID.currentValue() },
+      saveLastConnectedDeskUUID: { (uuid: String) in settings.lastConnectedDeskUUID.save(uuid) })
 
     remoteControl.doubleTapPublisher
       .receive(on: DispatchQueue.main)

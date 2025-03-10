@@ -13,6 +13,15 @@ class IdasenLinakBleRemoteControl: StandingDeskBleRemoteControllable {
   let centralManagerProxy: BleCentralManagerProxy
 
   @ObservationIgnored
+  private let shouldPinToLastDesk: () -> Bool
+
+  @ObservationIgnored
+  private let getLastConnectedDeskUUID: () -> String?
+
+  @ObservationIgnored
+  private let saveLastConnectedDeskUUID: (String) -> Void
+
+  @ObservationIgnored
   var subscriptions: Set<AnyCancellable> = []
   @ObservationIgnored
   var automationSubscription: AnyCancellable?
@@ -22,8 +31,16 @@ class IdasenLinakBleRemoteControl: StandingDeskBleRemoteControllable {
   @ObservationIgnored
   var doubleTapPublisher: PassthroughSubject<SwitchMoveDirection, Never> = .init()
 
-  init(proxy: BleCentralManagerProxy) {
-    centralManagerProxy = proxy
+  init(
+    proxy: BleCentralManagerProxy,
+    shouldPinToLastDesk: @escaping () -> Bool,
+    getLastConnectedDeskUUID: @escaping () -> String?,
+    saveLastConnectedDeskUUID: @escaping (String) -> Void
+  ) {
+    self.centralManagerProxy = proxy
+    self.shouldPinToLastDesk = shouldPinToLastDesk
+    self.getLastConnectedDeskUUID = getLastConnectedDeskUUID
+    self.saveLastConnectedDeskUUID = saveLastConnectedDeskUUID
 
     setupConnectStateDebugLogging()
     setupReconnectBLEPeripheralOnWakeFromSleep()
@@ -33,6 +50,14 @@ class IdasenLinakBleRemoteControl: StandingDeskBleRemoteControllable {
   func scanForNearbyDesks(autoConnectFirstFound: Bool) async throws {
     do {
       try await centralManagerProxy.waitUntilReady()
+
+      let pinToLastDesk = shouldPinToLastDesk()
+      let savedUUID = getLastConnectedDeskUUID()
+      let shouldAwaitSpecificDesk = autoConnectFirstFound && pinToLastDesk && savedUUID != nil
+
+      if shouldAwaitSpecificDesk {
+        Log.app.debug("Will auto-connect to previously connected desk with UUID: \(savedUUID ?? "unknown")")
+      }
 
       centralManagerProxy.scanForPeripherals(timeout: .seconds(30))
         .receive(on: DispatchQueue.main)
@@ -47,6 +72,7 @@ class IdasenLinakBleRemoteControl: StandingDeskBleRemoteControllable {
           },
           receiveValue: { peripheral, advertisementsData, rssi in
             let name = peripheral.name ?? peripheral.identifier.uuidString
+            let peripheralUUID = peripheral.identifier.uuidString
 
             let deskNamePattern = #/[Dd]esk [0-9]+/#
 
@@ -60,8 +86,17 @@ class IdasenLinakBleRemoteControl: StandingDeskBleRemoteControllable {
               )
               self.nearbyDesks[peripheral.identifier] = peripheral
 
-              if autoConnectFirstFound {
-                if case .unknown = self.activeDeskState {
+              if autoConnectFirstFound, case .unknown = self.activeDeskState {
+                if shouldAwaitSpecificDesk {
+                  // Only connect if this is the last connected desk
+                  if peripheralUUID == savedUUID {
+                    Task {
+                      Log.app.debug("Auto connecting to last connected desk: \(name)")
+                      try await self.connect(peripheral)
+                    }
+                  }
+                } else {
+                  // Regular auto-connect to first found desk
                   Task {
                     Log.app.debug("Auto connecting to \(name)")
                     try await self.connect(peripheral)
@@ -113,6 +148,9 @@ class IdasenLinakBleRemoteControl: StandingDeskBleRemoteControllable {
         timeout: .seconds(60))
 
       Log.app.debug("Connected to desk \(desk.name ?? desk.identifier.uuidString)")
+
+      saveLastConnectedDeskUUID(desk.identifier.uuidString)
+      Log.app.debug("Saved desk UUID: \(desk.identifier.uuidString)")
 
       let peripheralProxy = BlePeripheralProxy(peripheral: desk)
       let deskPositionProxy = DeskPositionProxy(peripheralProxy: peripheralProxy)

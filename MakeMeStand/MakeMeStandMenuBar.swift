@@ -12,6 +12,7 @@ struct MakeMeStandMenuBar: Scene {
   @AppStorage(\.autoSitMinute) var autoSitMinute: Int
   @AppStorage(\.autoStandInactivityTimeout) var autoStandInactivityTimeout: Int
   @AppStorage(\.doubleTapSwitch) var doubleTapSwitch: Bool
+  @AppStorage(\.pinToLastConnectedDesk) var pinToLastConnectedDesk: Bool
 
   // always store inches, regardless of display
   @AppStorage(\.standingHeightIn) var standingHeightIn: Double
@@ -152,7 +153,11 @@ struct MakeMeStandMenuBar: Scene {
       Divider()
 
       Menu("Settings") {
-        Toggle("Auto Connect to first found desk (toggle)", isOn: $autoConnect)
+        Toggle("Auto Connect to desk", isOn: $autoConnect)
+
+        if autoConnect {
+          Toggle("Auto Connect only to most recently connected desk", isOn: $pinToLastConnectedDesk)
+        }
 
         Toggle("Launch Make me Stand at Login (toggle)", isOn: $launchAtLogin)
           .onChange(of: launchAtLogin) { previousValue, newValue in
